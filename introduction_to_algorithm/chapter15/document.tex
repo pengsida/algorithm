@@ -77,7 +77,7 @@
 \definecolor{cdocblue}{rgb}{0,0,0.3}
 \definecolor{cdark}{rgb}{0.95,1.0,1.0}
 \lstset{
-	language=[x86masm]Assembler,
+	language=C,
 	numbers=left,
 	numberstyle=\tiny\color{black},
 	showspaces=false,
@@ -120,127 +120,92 @@
 
 % 改变段间隔
 \setlength{\parskip}{0.2em}
+
+\setlength{\itemsep}{0pt}
 \linespread{1.1}
 
 \usepackage{lastpage}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \lhead{\space \qquad \space}
-\chead{第四次学习报告 \qquad}
+\chead{动态规划 \qquad}
 \rhead{\qquad\thepage/\pageref{LastPage}}
 \begin{document}
 
-\section{系统调用}
-\section{LDT的实现}
-\subsection{LDT的定义}
-	首先我们需要在GDT表中增加局部描述符表的描述符。
-	\begin{lstlisting}
-		[SECTION .gdt]
-		LABEL_GDT: Descriptor 0,LDT
-		; 添加的描述符
-		LABEL_DESC_LDT: Descriptor 0,LDTLen-1,DA_LDT
-		; 相应的选择符
-		SelectorLDT equ LABEL_DESC_LDT - LABEL_GDT
-	\end{lstlisting}
-	
-	然后我们需要定义一个LDT表。LDT表和GDT表其实很类似，我在其中定义了一个指向CODEA代码段的段描述符。
-	\begin{lstlisting}
-		; 定义LDT表
-		[SECTION .ldt]
-		ALIGN 32
-		LABEL_LDT:
-		LABEL_LDT_DESC_CODEA: Descriptor 0,CodeALen-1,DA_C+DA_32
-		LDTLEN equ $-LABEL_LDT
-		
-		SelectorLDTCodeA equ LABEL_LDT_DESC_CODEA-LABEL_LDT+4
-		LDTLen equ $-LABEL_LDT
-		
-		; 定义在LDT表中段描述符指向的代码段
-		[SECTION .la]
-		ALIGN 32
-		[BITS 32]
-		LABEL_CODE_A:
-			mov ax,SelectorVideo
-			mov gs,ax
-			mov edi,(80*12+0)*2
-			mov ah,0Ch
-			mov al,'L'
-			mov [gs:edi],ax
-		CodeALen equ $-LABEL_CODE_A
-	\end{lstlisting}
-	
-	上面代码段中，我们应该注意的是这个语句。
-	\begin{lstlisting}
-		SelectorLDTCodeA equ LABEL_LDT_DESC_CODEA-LABEL_LDT+4
-	\end{lstlisting}
-	
-	这个选择符的定义和GDT选择符的定义有不同。在解释为什么这么写之前，我想重新说一下自己对段选择符的认识。因为在第二次学习报告中，我对它的描述实在过于粗糙。\par
-	段选择符是段的一个16位标志符。段选择符并不直接指向段，而是指向段描述符表中定义段的段描述符。段选择符的结构如下图。
-	\fic{1.png}
-	从图中可以看出，段选择符有3个字段内容：
-	\begin{itemize}
-		\item 请求特权级RPL。RPL被用于特权级保护机制中。
-		\item 表指示标志TI。当TI=0时，表示描述符在GDT中。当TI=1时，表示描述符在LDT中。因为一个任务执行时，可以同时访问到LDT和GDT，所以必须做这样的区别，以防在索引时放生混淆。
-		\item 索引值。用于索引在GDT表或LDT表中的段描述符。
-	\end{itemize}
-	
-	\begin{lstlisting}
-		; 这里特意加4，就是为了将段选择符中的第2位TI标志置一
-		SelectorLDTCodeA equ LABEL_LDT_DESC_CODEA-LABEL_LDT+4
-	\end{lstlisting}
-\subsection{LDT的初始化}
-	需要注意的是，既然在GDT表中添加了指向LDT表的段描述符，就应该在16位代码段中初始化它。
-	\begin{lstlisting}
-		[SECTION .16]
-		[BITS 16]
-			
-			; 初始化LDT在GDT中的描述符
-			xor eax,eax
-			mov ax,ds
-			shl eax,4
-			add eax,LABEL_LDT
-			mov word [LABEL_DESC_LDT + 2], ax
-			shr eax,16
-			mov byte [LABEL_DESC_LDT + 4], al
-			mov byte [LABEL_DESC_LDT + 7], ah
-	\end{lstlisting}
-	
-	LDT表和GDT表区别仅仅在于全局和局部的不同，所以初始化LDT表中描述符和之前的操作很类似。具体情况看下面的代码。
-	\begin{lstlisting}
-		[SECTION .16]
-		[BITS 16]
-			; 初始化LDT表中的描述符
-			xor eax,eax
-			mov ax,ds
-			shl eax,4
-			add eax,LABEL_CODE_A
-			mov word [LABEL_LDT_DESC_CODEA + 2], ax
-			shr eax,16
-			mov byte [LABEL_LDT_DESC_CODEA + 4], al
-			mov byte [LABEL_LDT_DESC_CODEA + 7], ah
-	\end{lstlisting}
-\subsection{调用LDT中的代码段}
-	\begin{lstlisting}
-		[SECTION .s32]
-		[BITS 32]
-			; 将LDT表的段选择符加载进LDTR寄存器中
-			; 在LDTR寄存器中的LDT段描述符存放着LDT表的基址
-			; 对LDT表中的代码段描述符进行寻址时，以LDTR中LDT表的描述符中的基址为准
-			; 偏移量由段选择符制定，用于索引LDT表中存放着的代码段描述符
-			; 当发生任务切换时，LDTR会更换新任务的LDT
-			mov ax,SelectorLDT
-			lldt ax
-			; CPU根据代码段描述符中的TI标志判断是索引GDT表还是索引LDT表
-			jmp SelectorLDTCodeA:0
-	\end{lstlisting}
-\subsection{总结如何添加LDT表}
-	\begin{itemize}
-		\item 添加一个LDT表，里面可以类似于GDT表，存放代码段、数据段或堆栈段。
-		\item 在GDT表中添加新LDT表的段描述符。
-		\item 在16位代码段中初始化新LDT表的段描述符。同时初始化LDT表中存放着的所有段描述符。
-	\end{itemize}
+\section{动态规划的基本步骤}
+\begin{itemize}
+	\item 描述最优解的结构。
+	\item 递归定义最优解的值。
+	\item 按自底向上的方式计算最优解的值。
+\end{itemize}
 
-\section{保护机制的实现}
-\subsection{保护机制的相应理论}
-	虽然我在第二次学习报告中也提到了保护机制，但是过于粗糙。我自己感觉对它的认识也不够深入，所以在这里重新整理一下对保护机制的认识。\par
+\section{装配线调度问题}
+\subsection{问题描述}
+	现在有两条装配线，编号为i，每一条装配线有n个装配站。编号为j，所以将装配线i的第j个装配站表示为$s_{i,j}$。每个装配站的时间都是不同的。我们把在装配站$s_{i,j}$上所需的装配时间记为$a_{i,j}$。零件进入装配线i所需要的时间记为$e_i$，离开装配线所需要的时间记为$x_i$。\par
+	工厂经理可以将部分完成的零件从一条装配线移到另一条装配线上，把已经通过装配站$s_{i,j}$的零件从装配线i移动到另一个装配线的时间为$t_{i,j}$。\par
+	现在的问题是，需要确定在装配线1和装配线2中选择哪些站，使得完成一个零件的时间最短。
+\subsection{问题解决}
+\subsubsection{描述最优解的结构}
+	对于装配线调度问题，一个问题的最优解包含了子问题的一个最优解，这种性质称为最优子结构。\par
+	我来解释一下这种性质。现在我们要找通过装配站$s_{i,j}$的最快路线。零件可能来自装配站$s_{1,j-1}$也可能来自装配站$s_{2,j-1}$。不管是来自哪个装配站，零件通过装配站$s_{1,j-1}$或$s_{2,j-1}$时，都需要保证它是经过最快路线的。这样一来，求解一个问题的最优解之前，我们可以先求出它的字问题的最优解。\par
+	这样一来，我们就可以利用子问题的最优解来构造原问题的一个最优解。现在我们想求出通过$s_{1,j}$的最优路线：
+	\begin{itemize}
+		\item 求出装配站$s_{1,j-1}$的最快路线，加上$a_{1,j}$后得到总时间。
+		\item 求出装配线$s_{2,j-1}$的最快路线，加上$t_{1,j-1}$和$a_{1,j}$得到总时间。
+		\item 对比两种方案的总时间，选择时间较短的路线为最佳路线。
+	\end{itemize}
+\subsubsection{递归定义最优解的值}
+	令$f_i[j]$表示一个零件从起点到装配站$s_{i,j}$的最快时间。令$f^*$表示完成一个零件所需要的最少时间。
+	很容易知道有下列等式关系成立：
+	\begin{equation}
+		f^* = min(f_1[n]+x_1,f_2[n]+x_2)
+	\end{equation}
+
+	通过子问题求解原问题，我们容易有下列等式成立：
+	\begin{equation}
+	\begin{split}
+		&f_1[j] = min(f_1[j-1]+a_{1,j},f_2[j-1]+t_{2,j-1}+a_{1,j})\\ 
+		&f_2[j] = min(f_2[j-1]+a_{2,j},f_1[j-1]+t_{1,j-1}+a_{2,j})
+	\end{split}
+	\end{equation}
+
+	而且问题的初始条件也是容易得到的：
+	\begin{equation}
+		\begin{split}
+			& f_1[1] = e_1 + a_{1,1}\\
+			& f_2[1] = e_2 + a_{2,1}
+		\end{split}
+	\end{equation}
+
+\subsubsection{按自底向上的方式计算最优解的值}
+	根据上一小节的公式，很容易就能编写出相应的伪代码。
+	\begin{lstlisting}
+		FASTEST_WAY(a,t,e,x,n)
+			f1[1] = e1 + a1[1]
+			f2[1] = e2 + a2[1]
+			for j = 2 to n
+				// 求f1[j]的最优路线
+				// l1[j]用于存放上一个装配站
+				if f1[j-1]+a1[j] <= f2[j-1]+t2[j-1]+a1[j]
+					f1[j] = f1[j-1] + a1[j]
+					l1[j] = 1
+				else
+					f1[j] = f2[j-1] + t2[j-1] + a1[j]
+					l1[j] = 2
+				// 求f2[j]的最优路线
+				// l2[j]用于存放上一个装配站
+				if f2[j-1]+a2[j] <= f1[j-1]+t1[j-1]+a2[j]
+					f2[j] = f2[j-1] + a2[j]
+					l2[j] = 2
+				else
+					f2[j] = f1[j-1] + t1[j-1] + a2[j]
+					l2[j] = 1 
+			if f1[n]+x1 <= f2[n]+x2
+				f = f1[n] + x1
+				l = 1
+			else
+				f = f2[n] + x2
+				l = 2
+			// 之后可以通过l、l1与l2中存放的路线构造出最快路线
+	\end{lstlisting}
 \end{document}

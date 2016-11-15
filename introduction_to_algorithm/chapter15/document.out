@@ -1,0 +1,7 @@
+\BOOKMARK [1][-]{section.1}{动态规划的基本步骤}{}% 1
+\BOOKMARK [1][-]{section.2}{装配线调度问题}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{问题描述}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{问题解决}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{描述最优解的结构}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{递归定义最优解的值}{subsection.2.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.2.3}{按自底向上的方式计算最优解的值}{subsection.2.2}% 7
