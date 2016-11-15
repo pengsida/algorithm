@@ -208,4 +208,51 @@
 				l = 2
 			// 之后可以通过l、l1与l2中存放的路线构造出最快路线
 	\end{lstlisting}
+
+\section{矩阵链乘法}
+\subsection{问题描述}
+	首先定义一个名词fully parenthesized。如果说一组矩阵乘积是fully parenthesized，有如下两种情况：
+	\begin{itemize}
+		\item 该组矩阵只有一个矩阵。
+		\item 该组矩阵由两个full parenthesized的矩阵组的乘积，且最外面有括号。
+	\end{itemize}
+	一组矩阵的相乘顺序与标量乘法运算的次数有很大的关系。矩阵链乘法问题就是想找出一个最优相乘顺序，使得标量乘法运算次数最小。
+
+\subsection{问题解决}
+\subsubsection{描述最优解的结构}
+	full parenthesized的中文是“加全部括号的”，不得不承认这个翻译很奇怪。但是为了组织语言更顺畅，我接下来用这个翻译代替full parenthesized。\par
+	现在有一个矩阵组$A_iA_{i+1}···A_j$，它的最优加全部括号的结构为$((A_i···A_k)(A_{k+1}···A_j))$。它的最优子结构是显而易见的，也就是要求$(A_i···A_k)$和$(A_{k+1}···A_j)$都是最优加全部括号的。\par
+	下面是利用子问题最优解来构造原问题最优解的过程：
+	\begin{itemize}
+		\item 有一个矩阵组$A_iA_{i+1}···A_j$，现在定义一个分割点k，于是将矩阵组分为$((A_i···A_k)(A_{k+1}···A_j))$。
+		\item 求解$(A_i···A_k)$和$(A_{k+1}···A_j)$的最优解，从而得到原问题的解。
+		\item 为了找到一个最优的k，需要对k进行遍历，求出k=i到k=j中每种情况下原问题的解。将使得标量乘法运算次数最小的k作为矩阵组的分割点。 
+	\end{itemize}
+\subsubsection{求递归解}
+	设$m[i,j]$为计算矩阵$A_{i···j}$所需的标量乘法运算次数的最小值。
+	则$A_iA_{i+1}···A_j$有递归式如下：
+	\begin{equation}
+		m[i,j] = m[i,k] + m[k+1,j] + p_{i-1}p_kp_j
+	\end{equation}
+\subsubsection{按自底向上的方法计算最优解}
+	根据上一小节的公式，可以写出下面的求解代码。
+	\begin{lstlisting}
+		MATRIX_CHAIN_ORDER(p)
+			n = length(p) - 1
+			for i = 1 to n
+				m[i,i] = 0
+			// 计算每一个m[i,j]的值
+			for l = 2 to n
+				for i = 1 to n-l+1
+					j = i + l - 1
+					m[i,j] = INF
+					for k = i to j-1
+						q = m[i,k]+m[k+1,j]+p[i-1]p[k]p[j]
+						if q < m[i,j]
+							m[i,j] = q
+							s[i,j] = k
+			return m and s
+	\end{lstlisting}
+
+\section{动态规划基础}
 \end{document}
