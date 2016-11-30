@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {1}选择排序}{2}{section.1}
+\contentsline {section}{\numberline {2}冒泡排序}{2}{section.2}
+\contentsline {section}{\numberline {3}顺序查找}{3}{section.3}
+\contentsline {section}{\numberline {4}蛮力字符串匹配}{3}{section.4}
+\contentsline {section}{\numberline {5}最近对问题}{4}{section.5}
+\contentsline {section}{\numberline {6}凸包问题}{5}{section.6}
+\contentsline {section}{\numberline {7}穷举查找}{7}{section.7}
+\contentsline {subsection}{\numberline {7.1}旅行商问题}{7}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}背包问题}{7}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}分配问题}{7}{subsection.7.3}
