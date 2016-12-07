@@ -1,0 +1,316 @@
+% !TeX spellcheck = en_US
+%% 字体：方正静蕾简体
+%%		 方正粗宋
+\documentclass[a4paper,left=2.5cm,right=2.5cm,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+\usepackage{cite}
+\usepackage{xeCJK}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{rotating}
+\usepackage{subfigure}
+\usepackage{tabu}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\setcounter{secnumdepth}{4}
+\usepackage{mhchem}
+\usepackage{multirow}
+\usepackage{extarrows}
+\usepackage{hyperref}
+\titleformat*{\section}{\LARGE}
+\renewcommand\refname{参考文献}
+\renewcommand{\abstractname}{\sihao \cjkfzcs 摘{  }要}
+%\titleformat{\chapter}{\centering\bfseries\huge\wryh}{}{0.7em}{}{}
+%\titleformat{\section}{\LARGE\bf}{\thesection}{1em}{}{}
+\titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{1em}{}{}
+\renewcommand{\contentsname}{{\cjkfzcs \centerline{目{  } 录}}}
+\setCJKfamilyfont{cjkhwxk}{STXingkai}
+\setCJKfamilyfont{cjkfzcs}{STSongti-SC-Regular}
+% \setCJKfamilyfont{cjkhwxk}{华文行楷}
+% \setCJKfamilyfont{cjkfzcs}{方正粗宋简体}
+\newcommand*{\cjkfzcs}{\CJKfamily{cjkfzcs}}
+\newcommand*{\cjkhwxk}{\CJKfamily{cjkhwxk}}
+\newfontfamily\wryh{Microsoft YaHei}
+\newfontfamily\hwzs{STZhongsong}
+\newfontfamily\hwst{STSong}
+\newfontfamily\hwfs{STFangsong}
+\newfontfamily\jljt{MicrosoftYaHei}
+\newfontfamily\hwxk{STXingkai}
+% \newfontfamily\hwzs{华文中宋}
+% \newfontfamily\hwst{华文宋体}
+% \newfontfamily\hwfs{华文仿宋}
+% \newfontfamily\jljt{方正静蕾简体}
+% \newfontfamily\hwxk{华文行楷}
+\newcommand{\verylarge}{\fontsize{60pt}{\baselineskip}\selectfont}  
+\newcommand{\chuhao}{\fontsize{44.9pt}{\baselineskip}\selectfont}  
+\newcommand{\xiaochu}{\fontsize{38.5pt}{\baselineskip}\selectfont}  
+\newcommand{\yihao}{\fontsize{27.8pt}{\baselineskip}\selectfont}  
+\newcommand{\xiaoyi}{\fontsize{25.7pt}{\baselineskip}\selectfont}  
+\newcommand{\erhao}{\fontsize{23.5pt}{\baselineskip}\selectfont}  
+\newcommand{\xiaoerhao}{\fontsize{19.3pt}{\baselineskip}\selectfont} 
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % 字号设置  
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % 字号设置  
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % 字号设置  
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % 字号设置  
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % 字号设置  
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % 字号设置 
+
+\usepackage{diagbox}
+\usepackage{multirow}
+\boldmath
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\definecolor{cred}{rgb}{0.8,0.8,0.8}
+\definecolor{cgreen}{rgb}{0,0.3,0}
+\definecolor{cpurple}{rgb}{0.5,0,0.35}
+\definecolor{cdocblue}{rgb}{0,0,0.3}
+\definecolor{cdark}{rgb}{0.95,1.0,1.0}
+\lstset{
+	language=C,
+	numbers=left,
+	numberstyle=\tiny\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	basicstyle=\scriptsize,
+	keywordstyle=\color{purple},
+	commentstyle=\itshape\color{cgreen},
+	stringstyle=\color{blue},
+	frame=lines,
+	% escapeinside=``,
+	extendedchars=true, 
+	xleftmargin=1em,
+	xrightmargin=1em, 
+	backgroundcolor=\color{cred},
+	aboveskip=1em,
+	breaklines=true,
+	tabsize=4
+} 
+
+\newfontfamily{\consolas}{Consolas}
+\newfontfamily{\monaco}{Monaco}
+\setmonofont[Mapping={}]{Consolas}	%英文引号之类的正常显示，相当于设置英文字体
+\setsansfont{Consolas} %设置英文字体 Monaco, Consolas,  Fantasque Sans Mono
+\setmainfont{Times New Roman}
+
+\setCJKmainfont{华文中宋}
+
+
+\newcommand{\fic}[1]{\begin{figure}[H]
+		\center
+		\includegraphics[width=0.8\textwidth]{#1}
+	\end{figure}}
+	
+\newcommand{\sizedfic}[2]{\begin{figure}[H]
+		\center
+		\includegraphics[width=#1\textwidth]{#2}
+	\end{figure}}
+
+\newcommand{\codefile}[1]{\lstinputlisting{#1}}
+
+% 改变段间隔
+\setlength{\parskip}{0.2em}
+\linespread{1.1}
+
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\space \qquad \space}
+\chead{第五章 减治法 \qquad}
+\rhead{\qquad\thepage/\pageref{LastPage}}
+\begin{document}
+
+\tableofcontents
+
+\clearpage
+
+\section{插入排序}
+\subsection{算法思路}
+	为A[n-1]找到一个合适的位置，然后把它插入到那里。
+	从右到左扫描这个有序的子数组，直到遇到第一个小于等于A[n-1]，然后就把A[n-1]插在该元素的后面。
+\subsection{算法实现代码}
+	\begin{lstlisting}
+	void insertion_sort(int *A, int len)
+	{
+		int i,j;
+		int temp;
+		for(i = 1; i < len; ++i)
+		{
+			temp = A[i];
+			for(j = i - 1; j > 0; --j)
+			{
+				if(A[j] <= temp)
+					break;
+				A[j+1] = A[j];
+			}
+			A[j+1] = temp;
+		}
+	}
+	\end{lstlisting}
+\subsection{算法分析}
+	\begin{itemize}
+		\item 最坏情况下，输入是一个严格递减的数组，此时键值比较次数为
+		\begin{equation}
+			C_{worst}(n) = \frac{(n-1)n}{2} \in \Theta(n^2)
+		\end{equation}
+		\item 最坏情况下，插入排序和选择排序的键值比较次数是完全一致的。
+		\item 最优情况下，输入是一个升序排列的数组。对于有序的数组，键值比较次数为
+		\begin{equation}
+			C_{best}(n) = n-1 \in \Theta(n)
+		\end{equation}
+		\item 该算法的平均键值比较次数是最差情况的一半，键值比较次数为
+		\begin{equation}
+			C_{avg}(n) \approx \frac{n^2}{4} \in \Theta(n^2)
+		\end{equation}
+	\end{itemize}
+
+\section{深度优先查找}
+\subsection{算法思路}
+	从任意顶点开始访问图，然后将该顶点标记为已访问。
+	在每次迭代的时候，该算法紧接着处理与当前顶点邻接的未访问顶点。
+	这个过程一直持续，直到遇到一个无法通向未访问邻接顶点的顶点。
+	此时，该算法沿着来路后退一条边，并试着从那里访问未访问的顶点。
+	当后退到起始顶点的时候，如果起始顶点所邻接的所有顶点都被访问过了，那就从未访问过的顶点开始，重复上述过程。
+\subsection{算法实现代码}
+	\begin{lstlisting}
+	typedef struct Vertex Vertex;
+	struct Vertex
+	{
+		int order;
+		int visited;
+		int parent;
+		int count;
+		Vertex** edges;
+	};
+	void dfs(Vertex *v, int *count)
+	{
+		Vertex *edge;
+		++(*count);
+		v->visited = 1;
+		visited->count = *count;
+		for(edge = v->edges; edge != NULL; ++edge)
+		{
+			if(edge->visited == 0)
+			{
+				edge->parent = v->order;
+				dfs(edge, *count);
+			}
+		}
+	}
+	void dfs_search(Vertex *V, int num)
+	{
+		int i;
+		int count = 0;
+		for(i = 0; i < num; ++i)
+		{
+			if(v[i].visited == 0)
+			{
+				(v+i)->parent = -1;
+				dfs(v+i, &count);
+			}
+		}
+	}
+	\end{lstlisting}
+\subsection{算法分析}
+	\begin{itemize}
+		\item 对于邻接矩阵表示法，该算法的时间复杂度为$\Theta(|V|^2)$。
+		对于邻接链表表示法，该遍历的时间复杂度为$\Theta(|V|+|E|)$。
+		\item 深度优先搜索可以检查图的连通性。当算法停止后，检查一下是否所有的顶点都被访问过了。
+		如果都被访问过了，那么这个图是连通的，否则它是不连通的。
+		\item 深度优先搜素可以检查图的无环性。利用DFS森林形式的表示法，如果DFS森林不包含回边，那么这个图就是无环的。
+	\end{itemize}
+
+\section{广度优先查找}
+\subsection{算法分析}
+	首先访问所有和初始顶点邻接的顶点，然后是离它两条边的所有未访问顶点。
+	以此类推，直到所有与初始化顶点同在一个连通分量中的顶点都访问过了为止。
+	如果仍然存在未被访问的顶点，该算法必须从该顶点，重复上述过程。
+
+\subsection{算法实现代码}
+	\begin{lstlisting}
+	typedef struct Vertex Vertex;
+	struct Vertex
+	{
+		int visited;
+		int count;
+		Vertex** edges;
+		int parent;
+		int order;
+	};
+
+	void bfs(Vertex* v, int* count, int num)
+	{
+		++(*count);
+		v->count = *count;
+		v->visited = 1;
+		int i;
+		int front = 0;
+		int rear = -1;
+		Vertex* temp;
+		Vertex* adjacent;
+		Vertex** queue = (Vertex**)malloc(num * sizeof(Vertex*));
+		queue[++rear] = v;
+		while(front <= rear)
+		{
+			temp = queue[front++];
+			for(i = 0; temp->edges[i] != NULL; ++i)
+			{
+				adjacent = temp->edges[i];
+				if(adjacent->visited == 0)
+				{
+					++(*count);
+					adjacent->visited = 1;
+					adjacent->parent = temp->order;
+					adjacent->count = *count;
+					queue[++rear] = adjacent;
+				}
+			}
+		}
+		free(queue);
+	}
+
+	void bfs_search(Vertex* v, int num)
+	{
+		int count = 0;
+		int i;
+		for(i = 0; i < num; ++i)
+		{
+			if(visited[i].visited == 0)
+			{
+				v->parent = -1;
+				bfs(v, &count, num);
+			}
+		}
+	}
+	\end{lstlisting}
+
+\subsection{算法分析}
+	\begin{itemize}
+		\item 对于邻接矩阵表示法，广度优先搜索的时间复杂度属于$\Theta(|V|^2)$。
+		而对于邻接链表表示法，它属于$\Theta(|V|+|E|)$。
+		\item BFS森林有两种不同类型的边：树向边和交叉边。树向边是指向原先未访问顶点的边，交叉边是指向那些已访问顶点的边。
+		\item 类似于DFS的做法，可以用BFS来检查图的连通性和无环性。
+		\item BFS可以用来求两个给定顶点间边数量最少的路径。 
+	\end{itemize}
+
+\section{拓扑排序}
+\section{生成排列}
+\section{生成子集}
+\section{假币问题}
+\section{俄式乘法}
+\section{约瑟夫斯问题}
+\section{计算中值和选择问题}
+\section{插值查找}
+\section{二叉查找树的查找和插入}
+
+\end{document}

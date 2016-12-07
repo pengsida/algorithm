@@ -1,0 +1,9 @@
+\contentsline {section}{\numberline {1}主定理}{2}{section.1}
+\contentsline {section}{\numberline {2}合并排序}{2}{section.2}
+\contentsline {section}{\numberline {3}快速排序}{3}{section.3}
+\contentsline {section}{\numberline {4}折半查找}{5}{section.4}
+\contentsline {section}{\numberline {5}二叉树的遍历}{6}{section.5}
+\contentsline {section}{\numberline {6}大整数乘法}{7}{section.6}
+\contentsline {section}{\numberline {7}Strassen矩阵乘法}{7}{section.7}
+\contentsline {section}{\numberline {8}用分治法解最近对问题}{7}{section.8}
+\contentsline {section}{\numberline {9}用分治法解凸包问题}{7}{section.9}

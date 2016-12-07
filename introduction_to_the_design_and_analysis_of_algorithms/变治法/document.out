@@ -1,0 +1,16 @@
+\BOOKMARK [1][-]{section.1}{预排序}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{检验数组中元素的唯一性}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{模式计算}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{查找问题}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{高斯消去法}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{算法实现代码}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.2}{算法改进}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.3}{算法分析}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.4}{LU分解}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.5}{计算矩阵的逆}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.6}{计算矩阵的行列式}{section.2}% 11
+\BOOKMARK [1][-]{section.3}{平衡查找树}{}% 12
+\BOOKMARK [1][-]{section.4}{堆和堆排序}{}% 13
+\BOOKMARK [1][-]{section.5}{霍纳法则}{}% 14
+\BOOKMARK [1][-]{section.6}{二进制幂}{}% 15
+\BOOKMARK [1][-]{section.7}{问题化简}{}% 16

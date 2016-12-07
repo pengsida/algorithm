@@ -1,0 +1,285 @@
+% !TeX spellcheck = en_US
+%% 字体：方正静蕾简体
+%%		 方正粗宋
+\documentclass[a4paper,left=2.5cm,right=2.5cm,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+\usepackage{cite}
+\usepackage{xeCJK}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{rotating}
+\usepackage{subfigure}
+\usepackage{tabu}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\setcounter{secnumdepth}{4}
+\usepackage{mhchem}
+\usepackage{multirow}
+\usepackage{extarrows}
+\usepackage{hyperref}
+\titleformat*{\section}{\LARGE}
+\renewcommand\refname{参考文献}
+\renewcommand{\abstractname}{\sihao \cjkfzcs 摘{  }要}
+%\titleformat{\chapter}{\centering\bfseries\huge\wryh}{}{0.7em}{}{}
+%\titleformat{\section}{\LARGE\bf}{\thesection}{1em}{}{}
+\titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{1em}{}{}
+\renewcommand{\contentsname}{{\cjkfzcs \centerline{目{  } 录}}}
+\setCJKfamilyfont{cjkhwxk}{STXingkai}
+\setCJKfamilyfont{cjkfzcs}{STSongti-SC-Regular}
+% \setCJKfamilyfont{cjkhwxk}{华文行楷}
+% \setCJKfamilyfont{cjkfzcs}{方正粗宋简体}
+\newcommand*{\cjkfzcs}{\CJKfamily{cjkfzcs}}
+\newcommand*{\cjkhwxk}{\CJKfamily{cjkhwxk}}
+\newfontfamily\wryh{Microsoft YaHei}
+\newfontfamily\hwzs{STZhongsong}
+\newfontfamily\hwst{STSong}
+\newfontfamily\hwfs{STFangsong}
+\newfontfamily\jljt{MicrosoftYaHei}
+\newfontfamily\hwxk{STXingkai}
+% \newfontfamily\hwzs{华文中宋}
+% \newfontfamily\hwst{华文宋体}
+% \newfontfamily\hwfs{华文仿宋}
+% \newfontfamily\jljt{方正静蕾简体}
+% \newfontfamily\hwxk{华文行楷}
+\newcommand{\verylarge}{\fontsize{60pt}{\baselineskip}\selectfont}  
+\newcommand{\chuhao}{\fontsize{44.9pt}{\baselineskip}\selectfont}  
+\newcommand{\xiaochu}{\fontsize{38.5pt}{\baselineskip}\selectfont}  
+\newcommand{\yihao}{\fontsize{27.8pt}{\baselineskip}\selectfont}  
+\newcommand{\xiaoyi}{\fontsize{25.7pt}{\baselineskip}\selectfont}  
+\newcommand{\erhao}{\fontsize{23.5pt}{\baselineskip}\selectfont}  
+\newcommand{\xiaoerhao}{\fontsize{19.3pt}{\baselineskip}\selectfont} 
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}      % 字号设置  
+\newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}  % 字号设置  
+\newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}    % 字号设置  
+\newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}   % 字号设置  
+\newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}  % 字号设置  
+\newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}    % 字号设置 
+
+\usepackage{diagbox}
+\usepackage{multirow}
+\boldmath
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\definecolor{cred}{rgb}{0.8,0.8,0.8}
+\definecolor{cgreen}{rgb}{0,0.3,0}
+\definecolor{cpurple}{rgb}{0.5,0,0.35}
+\definecolor{cdocblue}{rgb}{0,0,0.3}
+\definecolor{cdark}{rgb}{0.95,1.0,1.0}
+\lstset{
+	language=C,
+	numbers=left,
+	numberstyle=\tiny\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	basicstyle=\scriptsize,
+	keywordstyle=\color{purple},
+	commentstyle=\itshape\color{cgreen},
+	stringstyle=\color{blue},
+	frame=lines,
+	% escapeinside=``,
+	extendedchars=true, 
+	xleftmargin=1em,
+	xrightmargin=1em, 
+	backgroundcolor=\color{cred},
+	aboveskip=1em,
+	breaklines=true,
+	tabsize=4
+} 
+
+\newfontfamily{\consolas}{Consolas}
+\newfontfamily{\monaco}{Monaco}
+\setmonofont[Mapping={}]{Consolas}	%英文引号之类的正常显示，相当于设置英文字体
+\setsansfont{Consolas} %设置英文字体 Monaco, Consolas,  Fantasque Sans Mono
+\setmainfont{Times New Roman}
+
+\setCJKmainfont{华文中宋}
+
+
+\newcommand{\fic}[1]{\begin{figure}[H]
+		\center
+		\includegraphics[width=0.8\textwidth]{#1}
+	\end{figure}}
+	
+\newcommand{\sizedfic}[2]{\begin{figure}[H]
+		\center
+		\includegraphics[width=#1\textwidth]{#2}
+	\end{figure}}
+
+\newcommand{\codefile}[1]{\lstinputlisting{#1}}
+
+% 改变段间隔
+\setlength{\parskip}{0.2em}
+\linespread{1.1}
+
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\space \qquad \space}
+\chead{第六章 变治法 \qquad}
+\rhead{\qquad\thepage/\pageref{LastPage}}
+\begin{document}
+
+\tableofcontents
+
+\clearpage
+
+\section{预排序}
+\subsection{检验数组中元素的唯一性}
+	蛮力算法：对数组中的元素对进行比较，直到找到了两个相等的元素，或者所有的元素对都已比较完毕。它的最差效率属于$\Theta(n^2)$。\par
+	变治法的思想：先对数组排序，然后只检查它的连续元素。如果该数组有相等的元素，则一定有一对元素是相互紧挨着的。\par
+	实现代码如下：
+	\begin{lstlisting}
+	bool presort_element_uniqueness(int *A, int len)
+	{
+		int i;
+		quick_sort(A, len);
+		for(i = 0; i < len-1; ++i)
+		{
+			if(A[i] == A[i+1])
+				return false;
+		}
+		return true;
+	}
+	\end{lstlisting}
+
+	算法分析：算法总时间为用于排序的时间加上用于检验连续元素的时间。前者至少有$n\log n$次比较，而后者比较次数不会超过$n-1$。
+
+\subsection{模式计算}
+	在给定的数字列表中最经常出现的一个数值称为模式。\par
+	蛮力法的思想：在另一个列表中存储已经遇到的值和它们的出现频率。在每次迭代当中，通过遍历这个辅助列表，
+	原始列表中的第i个元素要和已遇到的数值进行比较。如果遇到一个匹配数值，该数值的出现次数加一。
+	否则将当前元素添加到辅助列表中，并把它的出现次数置为一。\par
+	基于蛮力法的算法，它的最差输入是一个没有相等元素的列表。在最差情况下，该算法的比较次数为$C(n) = \frac{(n-1)n}{2} \in \Theta(n^2)$。\par
+	变治法的思想：先对输入排序，然后求出在该有序数组中邻接次数最多的等值元素，相应地就求出了模式。
+
+	\begin{lstlisting}
+	int presort_mode(int *A, int len)
+	{
+		int i = 0;
+		int mode = -1;
+		int max_length = 0;
+		int length = 0;
+		int temp;
+		quick_sort(A, len);
+		while(i < len)
+		{
+			length = 1;
+			temp = A[i];
+			while(i < len-1 && temp == A[i+1])
+			{
+				++i;
+				++length;
+			}
+			if(length > max_length)
+			{
+				mode = temp;
+				max_length = length;
+			}
+			++i;
+		}
+		return mode;
+	}
+	\end{lstlisting}
+
+	该算法的运行时间受限于排序时间。
+
+\subsection{查找问题}
+	蛮力法的思想：顺序查找，最差情况下需要进行n次比较。\par
+	变治法的思想：预排序，然后应用折半查找。这个查找算法在最差情况下的总运行时间是$\Theta(n\log n)$。
+
+\section{高斯消去法}
+\subsection{算法实现代码}
+	\begin{lstlisting}
+	void gauss_elimination(double **A, double *b, int row, int col)
+	{
+		int i,j,k;
+		double temp;
+		for(i = 0; i < row; ++i)
+		{
+			for(j = i+1; j < row; ++j)
+			{
+				if(A[i][i] != 0)
+					temp = A[j][i] / A[i][i];
+				else
+					temp = 0;
+				for(k = i; k < col; ++k)
+					A[j][k] = A[j][k] - temp * A[i][k];
+				b[j] = b[j] - temp * b[i];
+			}
+		}
+	}
+	\end{lstlisting}
+
+\subsection{算法改进}
+	上述算法存在一个问题：$A[i][i]$可能会非常小，导致比例因子$A[j][i]/A[i][i]$非常大。\par
+	改进：每次都去找第i列系数的绝对值最大的行，然后把它作为第i次迭代的基点。这种修改称为部分选主元法。\par
+	改进算法的实现代码如下：
+	\begin{lstlisting}
+	void better_gauss_elimination(double **A, double *b, int row, int col)
+	{
+		int i,j,k;
+		int max_row;
+		double temp;
+		for(i = 0; i < row; ++i)
+		{
+			max_row = i;
+			for(j = i+1; j < row; ++j)
+			{
+				if(A[j][i] > A[max_row][i])
+					max_row = j;
+			}
+			for(k = i; k < col; ++k)
+			{
+				temp = A[i][k];
+				A[i][k] = A[max_row][k];
+				A[max_row][k] = temp;
+			}
+			temp = b[i];
+			b[i] = b[max_row];
+			b[max_row] = temp;
+			for(j = i+1; j < row; ++j)
+			{
+				temp = A[j][i] / A[i][i];
+				for(k = i; k < col; ++k)
+					A[j][k] = A[j][k] - temp * A[i][k];
+				b[j] = b[j] - temp * b[i];
+			} 
+		}
+	}
+	\end{lstlisting}
+
+\subsection{算法分析}
+	算法的基本操作是乘法操作。乘法操作次数为
+	\begin{equation}
+		C(n) \approx \frac{1}{3}n^3 \in \Theta(n^3)
+	\end{equation}
+
+\subsection{LU分解}
+	高斯消去法的现代商业实现以LU分解为基础。\par
+	矩阵A可以分解为下三角矩阵L和上三角矩阵U。L矩阵由主对角线上的1和高斯消去过程中行的乘数所构成的。U矩阵是对A进行高斯消去后得到的结果。\par
+	解方程组$Ax=b$就等价于解方程组$LUx=b$。
+	先设$y=Ux$，那么$Ly=b$，就能求出y。然后求解方程组$Ux=y$，就能求出x。\par
+	LU分解的优点：只要得到了矩阵A的LU分解，无论对于什么样的右边向量b，都可以利用矩阵L和矩阵U对其进行求解，不需要每次都进行高斯消去法。\par
+	LU分解不需要额外的存储空间，我们可以把U的非0部分存储在A的上三角部分，把L的有效部分存储在A的主对角线的下方。
+
+\subsection{计算矩阵的逆}
+\subsection{计算矩阵的行列式}
+
+\section{平衡查找树}
+\section{堆和堆排序}
+\section{霍纳法则}
+\section{二进制幂}
+\section{问题化简}
+
+\end{document}

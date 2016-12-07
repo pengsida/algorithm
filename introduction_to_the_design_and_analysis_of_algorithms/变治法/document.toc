@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}预排序}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}检验数组中元素的唯一性}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}模式计算}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}查找问题}{3}{subsection.1.3}
+\contentsline {section}{\numberline {2}高斯消去法}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}算法实现代码}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}算法改进}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}算法分析}{4}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}LU分解}{5}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}计算矩阵的逆}{5}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}计算矩阵的行列式}{5}{subsection.2.6}
+\contentsline {section}{\numberline {3}平衡查找树}{5}{section.3}
+\contentsline {section}{\numberline {4}堆和堆排序}{5}{section.4}
+\contentsline {section}{\numberline {5}霍纳法则}{5}{section.5}
+\contentsline {section}{\numberline {6}二进制幂}{5}{section.6}
+\contentsline {section}{\numberline {7}问题化简}{5}{section.7}
