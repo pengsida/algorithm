@@ -1,3 +1,3 @@
-彭思达对算法的学习
+对算法的学习
 introduction_to_algorithm里面放着我阅读算法导论时候的一些学习报告以及代码
 introduction_to_the_design_and_analysis_of_algorithms放着我的学习笔记
